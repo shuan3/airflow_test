@@ -10,14 +10,14 @@ import dagfactory
 # 'airflow' word is required for the dagbag to parse this file
 # from dagfactory import load_yaml_dags
 
-# load_yaml_dags(globals_dict=globals(), suffix=['Fuck_trump.yaml'])
+# load_yaml_dags(globals_dict=globals(), suffix=['_trump.yaml'])
 
 # import os
 
 # CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 # print(CUR_DIR)
 
-# dag_factory = dagfactory.DagFactory(f"{CUR_DIR}/Fuck_trump.yaml")
+# dag_factory = dagfactory.DagFactory(f"{CUR_DIR}/trump.yaml")
 # dag_factory.clean_dags(globals())
 # dag_factory.generate_dags(globals())
 
