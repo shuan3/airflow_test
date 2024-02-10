@@ -1,1 +1,3 @@
 dag-factory
+psycopg2
+airflow
