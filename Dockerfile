@@ -1,35 +1,42 @@
-FROM apache/airflow:2.7.3
-USER root
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-         vim \
-  && apt-get autoremove -yqq --purge \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-USER airflow
-#FROM apache/airflow:2.6.1 ADD requirements.txt . RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
-FROM python:3.8
+FROM python:3.6-slim
 
+ARG AIRFLOW_VERSION=2.7.3
+ARG AIRFLOW_HOME=/usr/local/airflow
+ENV SLUGIFY_USES_TEXT_UNIDECODE=yes
 
-WORKDIR /airflow
+RUN set -ex \
+    && buildDeps=' \
+    freetds-dev \
+    python3-dev \
+    libkrb5-dev \
+    libsasl2-dev \
+    libssl-dev \
+    libffi-dev \
+    libpq-dev \
+    git \
+    ' \
+    && apt-get update -yqq \
+    && apt-get upgrade -yqq \
+    && apt-get install -yqq --no-install-recommends \
+    $buildDeps \
+    freetds-bin \
+    build-essential \
+    python3-pip \
+    && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
+    && pip install -U pip setuptools wheel \
+    && apt-get clean \
+    && rm -rf \
+    /var/lib/apt/lists/* \
+    /tmp/* \
+    /var/tmp/* \
+    /usr/share/man \
+    /usr/share/doc \
+    /usr/share/doc-base
 
-# Install dependencies
-COPY requirements.txt ./
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install dag-factory
+RUN pip install apache-airflow[http]==${AIRFLOW_VERSION}
+ADD . /
+RUN pip install -e .
 
-# Copy application code
-# COPY . .
+RUN chmod +x /scripts/entrypoint.sh
 
-# CMD ["python", "your_app.py"]
-
-# USER root
-
-# Install gosu
-RUN apt-get update && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
-# # Add 'airflow' user
-# RUN useradd -ms /bin/bash airflow
-
-# # Switch to the 'airflow' user
-# USER airflow
+ENTRYPOINT ["/scripts/entrypoint.sh"]
