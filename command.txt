@@ -1,0 +1,43 @@
+mkdir airflow-local
+cd airflow-local
+use git bach
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.7.3/docker-compose.yaml'
+
+mkdir ./dags ./logs ./plugins ./utils
+
+
+echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+
+cat .env
+
+docker-compose up airflow-init
+
+docker-compose up
+docker ps
+docker build -t airflowtest .
+ docker-compose down --volumes --rm all
+
+docker-compose down --volumes --rmi all
+docker-compose up -d 
+
+https://towardsdatascience.com/run-airflow-docker-1b83a57616fb
+
+python dags/dynamic_dags/generator.py
+
+
+# if using docker file
+docker-compose up --build
+docker-compose up --up
+
+docker compose -f docker-compose.yaml build
+docker compose -f docker-compose.yaml up -d
+# use yaml only
+docker-compose up --up
+#refresh in airflow schedule
+airflow dags reserialize 
+
+
+
+git
+git checkout -b ray/test origin/ray/test
+git remote add origin/ray/test git@github.com:shuan3/airflow_test.git

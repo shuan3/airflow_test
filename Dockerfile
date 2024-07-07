@@ -7,6 +7,7 @@ ENV SLUGIFY_USES_TEXT_UNIDECODE=yes
 
 
 FROM apache/airflow:2.9.2
+COPY /scripts/entrypoint.sh /scripts/entrypoint.sh
 COPY requirements.txt /
 # COPY . /
 COPY . ${AIRFLOW_HOME}/
