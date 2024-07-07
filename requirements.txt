@@ -1,3 +1,5 @@
 dag-factory
-psycopg2
-apache-airflow
+# psycopg2
+# apache-airflow
+setuptools 
+wheel

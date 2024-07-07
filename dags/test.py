@@ -79,3 +79,6 @@ print_random_quote = PythonOperator(
     dag=dag
 
 )
+#set dependencies
+print_welcome_task>>print_random_quote>>print_date_task
+#chain(print_welcome_task,print_random_quote,print_date_task)
