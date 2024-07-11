@@ -11,7 +11,7 @@ COPY /scripts/entrypoint.sh /scripts/entrypoint.sh
 COPY requirements.txt /
 # COPY . /
 COPY . ${AIRFLOW_HOME}/
-RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r /requirements.txt
+# RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r /requirements.txt
 USER root
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -20,11 +20,11 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +x /scripts/entrypoint.sh
+# RUN chmod +x /scripts/entrypoint.sh
 
 USER airflow
 # RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -e .
-# RUN pip install -U pip setuptools wheel 
+
 # RUN set -ex \
 #     && buildDeps=' \
 #     freetds-dev \
@@ -60,4 +60,4 @@ USER airflow
 
 
 
-ENTRYPOINT ["/scripts/entrypoint.sh"]
+# ENTRYPOINT ["/scripts/entrypoint.sh"]

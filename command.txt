@@ -45,3 +45,11 @@ docker-compose up
 git
 git checkout -b ray/test origin/ray/test
 git remote add origin/ray/test git@github.com:shuan3/airflow_test.git
+
+
+
+  # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.7.3}
+  image: ${AIRFLOW_IMAGE_NAME:-ray/airflow:lastest}
+  # build:
+  #   context: .
+  #   dockerfile: Dockerfile
