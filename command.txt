@@ -37,6 +37,10 @@ docker-compose up --up
 airflow dags reserialize 
 
 
+#Build image first then compose up
+docker build . --tag ray/airflow:lastest
+docker-compose up
+
 
 git
 git checkout -b ray/test origin/ray/test

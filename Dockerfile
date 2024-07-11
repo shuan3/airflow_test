@@ -1,12 +1,12 @@
 FROM python:3.8.0
 
-ARG AIRFLOW_VERSION=2.9.2
+ARG AIRFLOW_VERSION=2.7.3
 ARG AIRFLOW_HOME=/usr/local/airflow
 ENV SLUGIFY_USES_TEXT_UNIDECODE=yes
 
 
 
-FROM apache/airflow:2.9.2
+FROM apache/airflow:2.7.3
 COPY /scripts/entrypoint.sh /scripts/entrypoint.sh
 COPY requirements.txt /
 # COPY . /
@@ -23,7 +23,7 @@ RUN apt-get update \
 RUN chmod +x /scripts/entrypoint.sh
 
 USER airflow
-RUN pip install -e .
+# RUN pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -e .
 # RUN pip install -U pip setuptools wheel 
 # RUN set -ex \
 #     && buildDeps=' \
