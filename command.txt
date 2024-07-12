@@ -53,3 +53,14 @@ git remote add origin/ray/test git@github.com:shuan3/airflow_test.git
   # build:
   #   context: .
   #   dockerfile: Dockerfile
+
+
+
+
+
+  You have two FROM in your Dockerfile which is likely wrong (you do not seem to be using multi-segmented build). 
+  You also use some SLUGIFY vars that were needed maybe 4 years ago and it looks like your Dockerfile is a bit messy and seems to be coming from slapped together
+   solutions found in some random blogs. I suggest  that you start from scratch based on the examples 
+   here https://airflow.apache.org/docs/docker-stack/build.html#examples-of-image-extending -  there are plenty of examples of 
+   what you should do to extend the image and all of them are actually tested automatically in our CI as well,
+   so it is quite likely that if you start with them and follow them, you will be able to avoid the kind of problem you have.
