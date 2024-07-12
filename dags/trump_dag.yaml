@@ -1,4 +1,4 @@
-test_dag:
+trump_dag:
   default_args:
     owner: 'example_owner'
     start_date: 2018-01-01  # or '2 days'
@@ -27,8 +27,8 @@ test_dag:
     task_3:
       operator: airflow.operators.bash_operator.BashOperator
       bash_command: 'echo 3'
-    #   dependencies: [task_1]
-    # task_5:
-    #   operator: airflow.operators.python_operator.PythonOperator
-    #   python_callable_name: print_hello
-    #   python_callable_file: /usr/local/airflow/dags/print_hello.py
+      dependencies: [task_1]
+    task_5:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: print_hello
+      python_callable_file: /usr/local/airflow/dags/print_hello.py

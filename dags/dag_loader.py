@@ -33,7 +33,10 @@ dag_factory = dagfactory.DagFactory(f"{CUR_DIR}/trump.yaml")
 dag_factory.clean_dags(globals())
 dag_factory.generate_dags(globals())
 
+# dag_factory = dagfactory.DagFactory(f"{CUR_DIR}/trump_dag.yaml")
 
+# dag_factory.clean_dags(globals())
+# dag_factory.generate_dags(globals())
 # Temporary to check if loading config works with same path.
 # with open(f"{CUR_DIR}//Fuck_trump.yaml", "r") as stream:
 #     try:
